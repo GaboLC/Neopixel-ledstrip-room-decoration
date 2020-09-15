@@ -12,9 +12,9 @@ white = (0, 255, 255, 255)
 off = (0, 0, 0, 0)
 
 pixel_pin = board.A1
-num_pixels = 294
+num_pixels =  288
 
-pixels = neopixel.NeoPixel(pixel_pin, num_pixels, brightness=0.9, auto_write=False,
+pixels = neopixel.NeoPixel(pixel_pin, num_pixels, brightness=0.3, auto_write=False,
                            pixel_order=(1, 0, 2, 3))
 
 def strobe(iterations,wait):
@@ -51,3 +51,21 @@ def color_chase(color, wait, delay):
 			pixels.show()
 		else:
 			time.sleep(delay)
+
+def color_chase_bounce(color1, color2, wait):
+	i = 0
+	while i <= num_pixels-2:
+		pixels[i] = color1
+		pixels.show()
+		i += 1
+		time.sleep(wait)
+	while i >= 0:
+		pixels[i] = color2
+		pixels.show()
+		i = i-1
+		time.sleep(wait)
+
+		"""
+		Todo:
+			Make a bounce transition through all the color
+		"""
