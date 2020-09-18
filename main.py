@@ -1,15 +1,11 @@
-import time
-import board
-import neopixel
-
-pixel_pin = board.A1
-num_pixels = 294
-
-pixels = neopixel.NeoPixel(pixel_pin, num_pixels, brightness=0.9, auto_write=False,
-                           pixel_order=(1, 0, 2, 3))
-
-red = (255, 0, 0, 0)
+from lights import *
 
 while True:
-	pixels.fill(red)
-	pixels.show()
+	  color_chase(red, 0.0001, 20)
+	  color_chase(yellow, 0.0001, 20)
+	  color_chase(green, 0.0001, 20)
+	  color_chase(cyan, 0.0001, 20)
+	  color_chase(blue, 0.0001, 20)
+	  color_chase(purple, 0.0001, 20)
+	  strobe(10, 0.5)
+	  color_chase_bounce(0.001, 5)
