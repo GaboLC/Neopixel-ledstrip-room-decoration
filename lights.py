@@ -1,6 +1,7 @@
 import time
 import board
 import neopixel
+import random
 
 red = (255, 0, 0, 0)
 yellow = (255, 150, 0, 0)
@@ -14,7 +15,7 @@ off = (0, 0, 0, 0)
 pixel_pin = board.A1
 num_pixels =  288
 
-pixels = neopixel.NeoPixel(pixel_pin, num_pixels, brightness=0.3, auto_write=False,
+pixels = neopixel.NeoPixel(pixel_pin, num_pixels, brightness=0.9, auto_write=False,
                            pixel_order=(1, 0, 2, 3))
 
 def strobe(iterations,wait):
@@ -52,18 +53,23 @@ def color_chase(color, wait, delay):
 		else:
 			time.sleep(delay)
 
-def color_chase_bounce(color1, color2, wait):
+def color_chase_bounce(wait, iteration):
 	i = 0
-	while i <= num_pixels-2:
-		pixels[i] = color1
-		pixels.show()
-		i += 1
-		time.sleep(wait)
-	while i >= 0:
-		pixels[i] = color2
-		pixels.show()
-		i = i-1
-		time.sleep(wait)
+	colors = [red, yellow, green, cyan, blue, purple]
+	for a in range(iteration):
+		color1 = random.choice(colors)
+		color2 = random.choice(colors)
+		print(color1, color2)
+		while i <= num_pixels-2:
+			pixels[i] = color1
+			pixels.show()
+			i += 1
+			time.sleep(wait)
+		while i >= 0:
+			pixels[i] = color2
+			pixels.show()
+			i = i-1
+			time.sleep(wait)
 
 		"""
 		Todo:
